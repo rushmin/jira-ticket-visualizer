@@ -1,0 +1,12 @@
+/* basic positioning */
+.legend { list-style: none; }
+.legend li { float: left; margin-right: 10px; }
+.legend span { border: 1px solid #ccc; float: left; width: 12px; height: 12px; margin: 2px; }
+
+/* your colors */
+.legend .state-open { background-color:rgba(230, 51, 51, 1);}
+.legend .state-in-progress { background-color:rgba(246, 205, 70, 1);}
+.legend .state-woc { background-color:rgba(9, 190, 157, 1);}
+.legend .state-wow { background-color:rgba(246, 126, 70, 1);}
+.legend .state-resolved { background-color:rgba(0, 102, 44, 1);}
+.legend .state-reopened { background-color:rgba(230, 51, 51, 1);}

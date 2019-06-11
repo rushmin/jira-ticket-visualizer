@@ -1,0 +1,5 @@
+{
+  "jiraEndpoint":"<base-path-of-jira-api>",
+  "jiraUsername":"<jira-user-name>",
+  "jiraPassword":"<jira-password>"
+}
