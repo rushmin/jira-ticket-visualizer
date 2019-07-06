@@ -39,7 +39,7 @@ function closeRc(io:ReadableCharacterChannel rc) {
     }
 }
 
-function callJira(string jql, string maxResults)  returns (json){
+function callJira(string jql, string maxResults, string startAt)  returns (json){
 
   http:Client clientEndpoint = new(<string> properties.jiraEndpoint, config = {
     auth: {
@@ -52,7 +52,7 @@ function callJira(string jql, string maxResults)  returns (json){
   log:printInfo("Calling JIRA API");
   http:Request req = new;
 
-  var response = clientEndpoint->get("/rest/api/2/search?jql=" + jql + "&maxResults=" + maxResults + "&expand=changelog", message = req);
+  var response = clientEndpoint->get("/rest/api/2/search?jql=" + jql + "&maxResults=" + maxResults + "&startAt=" + startAt + "&expand=changelog", message = req);
   log:printInfo("Received a response from JIRA API");
 
   return handleResponse(response);
@@ -97,8 +97,9 @@ service jiraProxy on new http:Listener(9092) {
         if (params is map<string>){
           var jql = <string>params.jql;
           var maxResults = <string>params.maxResults;
+          var startAt = <string>params.startAt;
           http:Response res = new;
-          json responseJson = untaint callJira(jql, maxResults);
+          json responseJson = untaint callJira(jql, maxResults, startAt);
           res.setJsonPayload(responseJson);
           var result = caller->respond(res);
           if (result is error) {

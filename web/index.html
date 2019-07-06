@@ -8,43 +8,171 @@
   </head>
   <body>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="form-group col-sm">
-          <label for="jql">JQL</label>
-          <textarea class="form-control" id="jql"></textarea>
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-gauges-tab" data-toggle="tab" href="#nav-gauges" role="tab" aria-controls="nav-gauges" aria-selected="true">Gauges</a>
+        <a class="nav-item nav-link" id="nav-workload-timeline-tab" data-toggle="tab" href="#nav-workload-timeline" role="tab" aria-controls="nav-workload-timeline" aria-selected="false">Workload Generation Timeline</a>
+        <a class="nav-item nav-link" id="nav-timeline-tab" data-toggle="tab" href="#nav-timeline" role="tab" aria-controls="nav-timeline" aria-selected="false">Timeline</a>
+        <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-settings" role="tab" aria-controls="nav-settings" aria-selected="false">Settings</a>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-gauges" role="tabpanel" aria-labelledby="nav-gauges-tab">
+        <div class="row">
+          <div class="form-group col-sm">
+            <label for="ticketType">Ticket Type</label>
+            <select class="form-control" id="ticketType">
+              <option value="all">All</option>
+              <option value="5">Incident</option>
+              <option value="6">Query</option>
+            </select>
+          </div>
+        </div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Tickets Count</th>
+              <th scope="col">New Tickets Count</th>
+              <th scope="col">Workload</th>
+              <th scope="col">Responding Ratio</th>
+              <th scope="col">Attending Ratio</th>
+              <th scope="col">Tickets</th>
+              <th scope="col">Avg. Open Time</th>
+              <th scope="col">Avg. In-Progress Time</th>
+              <th scope="col">Avg. WOW Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>ALL</th>
+              <td><div id="ALL_count" class="col-sm"></div></td>
+              <td><div id="ALL_newCount" class="col-sm"></div></td>
+              <td><div id="ALL_workload" class="col-sm"></div></td>
+              <td><div id="ALL_respondingRatio" class="col-sm"></div></td>
+              <td><div id="ALL_attendingRatio" class="col-sm"></div></td>
+              <td><div id="ALL_tickets" class="col-sm"></div></td>
+              <td><div id="ALL_1_gauge" class="col-sm"></div></td>
+              <td><div id="ALL_3_gauge" class="col-sm"></div></td>
+              <td><div id="ALL_10002_gauge" class="col-sm"></div></td>
+            </tr>
+            <tr>
+              <th>APIM</th>
+              <td><div id="APIM_count" class="col-sm"></div></td>
+              <td><div id="APIM_newCount" class="col-sm"></div></td>
+              <td><div id="APIM_workload" class="col-sm"></div></td>
+              <td><div id="APIM_respondingRatio" class="col-sm"></div></td>
+              <td><div id="APIM_attendingRatio" class="col-sm"></div></td>
+              <td><div id="APIM_tickets" class="col-sm"></div></td>
+              <td><div id="APIM_1_gauge" class="col-sm"></div></td>
+              <td><div id="APIM_3_gauge" class="col-sm"></div></td>
+              <td><div id="APIM_10002_gauge" class="col-sm"></div></td>
+            </tr>
+            <tr>
+              <th>IAM</th>
+              <td><div id="IAM_count" class="col-sm"></div></td>
+              <td><div id="IAM_newCount" class="col-sm"></div></td>
+              <td><div id="IAM_workload" class="col-sm"></div></td>
+              <td><div id="IAM_respondingRatio" class="col-sm"></div></td>
+              <td><div id="IAM_attendingRatio" class="col-sm"></div></td>
+              <td><div id="IAM_tickets" class="col-sm"></div></td>
+              <td><div id="IAM_1_gauge" class="col-sm"></div></td>
+              <td><div id="IAM_3_gauge" class="col-sm"></div></td>
+              <td><div id="IAM_10002_gauge" class="col-sm"></div></td>
+            </tr>
+            <tr>
+              <th>EI</th>
+              <td><div id="EI_count" class="col-sm"></div></td>
+              <td><div id="EI_newCount" class="col-sm"></div></td>
+              <td><div id="EI_workload" class="col-sm"></div></td>
+              <td><div id="EI_respondingRatio" class="col-sm"></div></td>
+              <td><div id="EI_attendingRatio" class="col-sm"></div></td>
+              <td><div id="EI_tickets" class="col-sm"></div></td>
+              <td><div id="EI_1_gauge" class="col-sm"></div></td>
+              <td><div id="EI_3_gauge" class="col-sm"></div></td>
+              <td><div id="EI_10002_gauge" class="col-sm"></div></td>
+            </tr>
+            <tr>
+              <th>Analytics</th>
+              <td><div id="Analytics_count" class="col-sm"></div></td>
+              <td><div id="Analytics_newCount" class="col-sm"></div></td>
+              <td><div id="Analytics_workload" class="col-sm"></div></td>
+              <td><div id="Analytics_respondingRatio" class="col-sm"></div></td>
+              <td><div id="Analytics_attendingRatio" class="col-sm"></div></td>
+              <td><div id="Analytics_tickets" class="col-sm"></div></td>
+              <td><div id="Analytics_1_gauge" class="col-sm"></div></td>
+              <td><div id="Analytics_3_gauge" class="col-sm"></div></td>
+              <td><div id="Analytics_10002_gauge" class="col-sm"></div></td>
+            </tr>
+            <tr>
+              <th>OB</th>
+              <td><div id="OB_count" class="col-sm"></div></td>
+              <td><div id="OB_newCount" class="col-sm"></div></td>
+              <td><div id="OB_workload" class="col-sm"></div></td>
+              <td><div id="OB_respondingRatio" class="col-sm"></div></td>
+              <td><div id="OB_attendingRatio" class="col-sm"></div></td>
+              <td><div id="OB_tickets" class="col-sm"></div></td>
+              <td><div id="OB_1_gauge" class="col-sm"></div></td>
+              <td><div id="OB_3_gauge" class="col-sm"></div></td>
+              <td><div id="OB_10002_gauge" class="col-sm"></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="nav-workload-timeline" role="tabpanel" aria-labelledby="nav-workload-timeline-tab">
+        <div id="workloadTimeline" class="col-sm"></div>
+      </div>
+      <div class="tab-pane fade" id="nav-timeline" role="tabpanel" aria-labelledby="nav-timeline-tab">
+        <div id="ticketTimeline"  class="col-sm"></div>
+      </div>
+      <div class="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="form-group col-sm">
+              <label for="jql">JQL</label>
+              <textarea class="form-control" id="jql"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm">
+              <label for="maxResults">Max. Results</label>
+              <input type="text" class="form-control" id="maxResults" value="250" placeholder="e.g. 100">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm">
+              <label for="startAt">Start At</label>
+              <input type="text" class="form-control" id="startAt" value="0" placeholder="e.g. 0">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm">
+              <label for="jql">Duration</label>
+              <input type="text" class="form-control" id="duration" value="24 hours" placeholder="e.g. 24 hours">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm">
+              <label for="apiUrl">API URL</label>
+              <input type="text" class="form-control" id="apiUrl" value="http://localhost:9092/jiraProxy/search" placeholder="e.g. http://localhost:9092/jiraProxy/search">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm">
+              <label for="apiTimeout">API Timeout</label>
+              <input type="text" class="form-control" id="apiTimeout" value="60000" placeholder="e.g. 60000">
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="form-group col-sm">
-          <input type="text" class="form-control" id="maxResults" placeholder="Max. Results">
-        </div>
-        <div class="form-group col-sm">
-          <input type="text" class="form-control" id="duration" placeholder="Duration">
-        </div>
-        <div class="col-sm">
-          <button type="button" class="btn btn-primary" id="drawGraph">Draw Graph</button>
-        </div>
-      </div>
-  </div>
-
-    <ul class="legend">
-      <li><span class="state-open"></span>Open</li>
-      <li><span class="state-in-progress"></span>In Progress</li>
-      <li><span class="state-woc"></span>Waiting on Client</li>
-      <li><span class="state-wow"></span>Waiting on WSO2</li>
-      <li><span class="state-resolved"></span>Resolved</li>
-      <li><span class="state-reopened"></span>Reopened</li>
-    </ul>
-
-    <div id="ticketGraphContainer">
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="properties.js" type="text/javascript"></script>
     <script src="moment.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="visualize.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
   </body>
 </html>
